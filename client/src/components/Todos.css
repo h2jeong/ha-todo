@@ -1,0 +1,14 @@
+.todoList select {
+  margin: 15px 0;
+  font-size: 1em;
+  border: 1px solid #ccc;
+}
+
+.todoList li {
+  padding-bottom: 10px;
+  font-size: 0.9em;
+}
+.todoList li::before {
+  content: "-";
+  padding-right: 5px;
+}
