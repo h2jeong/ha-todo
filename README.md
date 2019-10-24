@@ -14,3 +14,4 @@ Server.js
    
    app.get : "/api/todos" - todos 전체 데이터
    
+5. yarn dev (client && server 실행)
