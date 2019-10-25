@@ -11,6 +11,7 @@ Server.js
 4. api
 
    app.get : "/api/users" - users 전체 데이터
-   
+
    app.get : "/api/todos" - todos 전체 데이터
-   
+
+5. yarn dev : client && sever 구동
