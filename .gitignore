@@ -24,6 +24,5 @@ yarn-error.log*
 
 # database
 /database.json
-
-# upload
-/upload
+# sequelize 
+sequelize/config/config.json

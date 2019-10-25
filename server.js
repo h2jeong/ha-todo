@@ -1,44 +1,18 @@
 const express = require("express");
-const bodyPaser = require("body-parser");
-const app = express();
+var morgan = require("morgan");
+const cors = require("cors");
 const port = process.env.PORT || 5000;
-const fs = require("fs");
+const router = require("./routes.js");
+const sequelize = require("./sequelize/models/index").sequelize;
+const app = express();
 
-app.use(bodyPaser.json());
-app.use(bodyPaser.urlencoded({ extended: true }));
+sequelize.sync();
 
-const data = fs.readFileSync("./database.json");
-const conf = JSON.parse(data);
-const mysql = require("mysql");
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(cors());
 
-const connection = mysql.createConnection({
-  host: conf.host,
-  user: conf.user,
-  password: conf.password,
-  port: conf.port,
-  database: conf.database
-});
-
-app.get("/api/users", (req, res) => {
-  connection.query("SELECT * FROM users", (err, rows) => {
-    if (!err) {
-      res.send(rows);
-    } else {
-      console.log(`query error : ${err}`);
-      res.send(err);
-    }
-  });
-});
-
-app.get("/api/todos", (req, res) => {
-  connection.query("SELECT * FROM todos", (err, rows) => {
-    if (!err) {
-      res.send(rows);
-    } else {
-      console.log(`query error : ${err}`);
-      res.send(err);
-    }
-  });
-});
+app.use("/", router);
+app.use(express.static(__dirname + "./client"));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

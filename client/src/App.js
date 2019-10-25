@@ -21,17 +21,17 @@ class App extends Component {
   }
 
   _callApi = async () => {
-    const response = await fetch("/api/users");
+    const response = await fetch("/users");
     const body = await response.json();
-    //console.log("body:", body);
+    console.log("body:", body);
     return body;
   };
 
   _getTodos = id => {
-    fetch("/api/todos")
+    fetch("/todos")
       .then(response => response.json())
       .then(data => {
-        // console.log("todos:", data);
+        console.log("todos:", data);
         let todos = data.filter(todo => todo.userId === id);
         this.setState({ todos: todos });
       })
@@ -39,13 +39,19 @@ class App extends Component {
   };
 
   _handleSelect = e => {
-    const selected = Number(e.target.value);
-    const selectedUser = this.state.users ? this.state.users[selected - 1] : {};
-    this._getTodos(selected);
-    this.setState({
-      selected_user_id: selected,
-      selected_user: selectedUser
-    });
+    if (e.target.value === "") {
+      alert("선택하지 않았습니다.");
+    } else {
+      const selected = Number(e.target.value);
+      const selectedUser = this.state.users
+        ? this.state.users[selected - 1]
+        : {};
+      this._getTodos(selected);
+      this.setState({
+        selected_user_id: selected,
+        selected_user: selectedUser
+      });
+    }
   };
 
   render() {
