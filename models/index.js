@@ -1,4 +1,4 @@
-var db = require("../sequelize/models/");
+const db = require("../sequelize/models/");
 
 module.exports = {
   users: {

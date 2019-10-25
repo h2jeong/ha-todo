@@ -1,5 +1,5 @@
 const express = require("express");
-var morgan = require("morgan");
+const morgan = require("morgan");
 const cors = require("cors");
 const port = process.env.PORT || 5000;
 const router = require("./routes.js");
@@ -15,4 +15,11 @@ app.use(cors());
 app.use("/", router);
 app.use(express.static(__dirname + "./client"));
 
+// app.get("/test", async (req, res) => {
+//   res.json({ message: "pass!" });
+// });
+
+// app.get("*", (req, res) => {
+//   res.status(404).json({ message: "404 not found" });
+// });
 app.listen(port, () => console.log(`Listening on port ${port}`));
