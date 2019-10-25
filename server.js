@@ -15,10 +15,6 @@ app.use(cors());
 app.use("/", router);
 app.use(express.static(__dirname + "./client"));
 
-// app.get("/test", async (req, res) => {
-//   res.json({ message: "pass!" });
-// });
-
 // app.get("*", (req, res) => {
 //   res.status(404).json({ message: "404 not found" });
 // });
